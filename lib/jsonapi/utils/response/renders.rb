@@ -2,6 +2,15 @@ module JSONAPI
   module Utils
     module Response
       module Renders
+
+        def jsonapi_head_render(status: nil)
+          head status || :ok
+        rescue => e
+          handle_exceptions(e)
+        ensure
+          correct_media_type
+        end
+
         # This render works without defining JSONAPI Resources. Useful in cases when your resources are defined otherwise,
         # for example using ActiveModel Serializers
         def jsonapi_lean_render(json:, status: nil)
