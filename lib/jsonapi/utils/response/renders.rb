@@ -47,9 +47,9 @@ module JSONAPI
           jsonapi_render_errors(::JSONAPI::Utils::Exceptions::BadRequest.new)
         end
 
-        def jsonapi_render_not_found(exception)
-          id = exception.message.match(/=([\w-]+)/).try(:[], 1) || '(no identifier)'
-          jsonapi_render_errors(JSONAPI::Exceptions::RecordNotFound.new(id))
+        def jsonapi_render_not_found(exception = nil, id: nil)
+          record_id = exception.present? ? exception.message.match(/=([\w-]+)/).try(:[], 1) || '(no identifier)' : "#{id}"
+          jsonapi_render_errors(JSONAPI::Exceptions::RecordNotFound.new(record_id))
         end
 
         def jsonapi_render_not_found_with_null

@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.description   = "A Rails way to get your API's data serialized through JSON API's specs (http://jsosapi.org)"
   spec.homepage      = 'https://github.com/b2beauty/jsonapi-utils'
   spec.license       = 'MIT'
+  spec.required_ruby_version = '>= 2.0.0'
 
   spec.files         = Dir.glob('{bin,lib}/**/*') + %w(LICENSE.txt README.md CODE_OF_CONDUCT.md)
   spec.bindir        = 'exe'
