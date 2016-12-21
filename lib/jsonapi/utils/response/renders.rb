@@ -3,6 +3,7 @@ module JSONAPI
     module Response
       module Renders
 
+        # Respond with HEAD and the provided status. If status not provided, 200 will be returned
         def jsonapi_head_render(status: nil)
           head status || :ok
         rescue => e
@@ -11,8 +12,8 @@ module JSONAPI
           correct_media_type
         end
 
-        # This render works without defining JSONAPI Resources. Useful in cases when your resources are defined otherwise,
-        # for example using ActiveModel Serializers
+        # Render provided json in a JSON-API compatible way. This render works without defining JSONAPI Resources.
+        # Useful in cases when your resources are defined otherwise, for example using ActiveModel Serializers
         def jsonapi_lean_render(json:, status: nil)
           render json: json, status: status || :ok
         rescue => e
