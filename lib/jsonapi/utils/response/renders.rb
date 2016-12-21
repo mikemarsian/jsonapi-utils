@@ -4,8 +4,8 @@ module JSONAPI
       module Renders
 
         # Respond with HEAD and the provided status. If status not provided, 200 will be returned
-        def jsonapi_head_render(status: nil)
-          head status || :ok
+        def jsonapi_head_render(status: :ok)
+          head status
         rescue => e
           handle_exceptions(e)
         ensure
