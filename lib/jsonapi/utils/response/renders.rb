@@ -14,8 +14,10 @@ module JSONAPI
 
         # Render provided json in a JSON-API compatible way. This render works without defining JSONAPI Resources.
         # Useful in cases when your resources are defined otherwise, for example using ActiveModel Serializers
-        def jsonapi_lean_render(json:, status: nil)
-          render json: json, status: status || :ok
+        def jsonapi_lean_render(resource, response_params = {})
+          render_hash = { json: resource }.merge(response_params)
+          render_hash[:status] = :ok if render_hash[:status].blank?
+          render render_hash
         rescue => e
           handle_exceptions(e)
         ensure
